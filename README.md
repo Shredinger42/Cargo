@@ -1,7 +1,7 @@
 # Для развертывания:
 1. Выполнить команды
    ```
-   docker build . -t cargo WebService
+   docker build . -t cargo
    docker run -p 5001:80 cargo
    ```
    Чтобы собрать и запустить образ сервиса на порту 5001
