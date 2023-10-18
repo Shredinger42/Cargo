@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Cargo.TableOfApplications"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cargo" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:local1="clr-namespace:Cargo.ViewModels" xmlns:my="clr-namespace:Cargo.Converters" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxmvvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             mc:Ignorable="d"
+             
+             d:DesignHeight="450">
+    <UserControl.DataContext>
+        <local1:RequestsViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <my:EnumToStringConverter x:Key="EnumToStringConverter"/>
+    </UserControl.Resources>
+    <dxmvvvm:Interaction.Behaviors>
+        <dx:DialogService DialogWindowStartupLocation="CenterOwner" Name="Edit">
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <local:EditRequestView/>
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:DXDialogWindow">
+                    <Setter Property="MinWidth" Value="450" />
+                    <Setter Property="MinHeight" Value="390" />
+                    <Setter Property="MaxWidth" Value="450" />
+                    <Setter Property="MaxHeight" Value="390" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+        <dx:DialogService DialogWindowStartupLocation="CenterOwner">
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <local:NewRequest/>
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:DXDialogWindow">
+                    <Setter Property="MinWidth" Value="450" />
+                    <Setter Property="MinHeight" Value="260" />
+                    <Setter Property="MaxWidth" Value="450" />
+                    <Setter Property="MaxHeight" Value="260" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+        <dx:DialogService DialogWindowStartupLocation="CenterOwner" Name="Submitt">
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <local:SubmittView/>
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:DXDialogWindow">
+                    <Setter Property="MinWidth" Value="190" />
+                    <Setter Property="MinHeight" Value="150" />
+                    <Setter Property="MaxWidth" Value="190" />
+                    <Setter Property="MaxHeight" Value="150" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+    </dxmvvvm:Interaction.Behaviors>
+    <dxb:BarManager HorizontalAlignment="Stretch">
+        <dxb:BarManager.Bars>
+            <dxb:Bar Caption="bar1" IsMainMenu="True" IsStatusBar="False" ShowDragWidget="False" UseWholeRow="True">
+                <dxb:Bar.DockInfo>
+                    <dxb:BarDockInfo ContainerType="Top"/>
+                </dxb:Bar.DockInfo>
+                <dxb:BarButtonItem Content="Зарегистрировать" Command="{Binding AddNewRequestCommand}"/>
+                <dxb:BarButtonItem Content="Передать на выполнение" Command="{Binding SelectedItem.ShowSubmitCommand}" IsEnabled="{Binding SelectedItem.CargoRequest.IsRequestNew}"/>
+                <dxb:BarButtonItem Content="Редактировать" Command="{Binding SelectedItem.ShowEditCommand}" IsEnabled="{Binding SelectedItem.CargoRequest.IsRequestNew}"/>
+                <dxb:BarButtonItem Content="Удалить" Command="{Binding DeleteRequestCommand}" CommandParameter="{Binding SelectedItem}"/>
+            </dxb:Bar>
+        </dxb:BarManager.Bars>
+        <dxg:GridControl  AutoGenerateColumns="None" EnableSmartColumnsGeneration="True" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" ItemsSource="{Binding CargoRequests}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <dxg:GridColumn Header="Наименование груза" Binding="{Binding CargoRequest.Cargo.Name, Mode=TwoWay}"/>
+            <dxg:GridColumn Header="Вес груза" Binding="{Binding CargoRequest.Cargo.Weight, Mode=TwoWay}"/>
+            <dxg:GridColumn Header="Стоимость груза" Binding="{Binding CargoRequest.Cargo.Price, Mode=TwoWay }"/>
+            <dxg:GridColumn Header="Состояние заказа" Binding="{Binding CargoRequest.State, Mode=TwoWay, Converter={StaticResource EnumToStringConverter}}"/>
+            <dxg:GridColumn Header="Адрес" Binding="{Binding CargoRequest.Adress, Mode=TwoWay}"/>
+            <dxg:GridColumn Header="Отправитель" Binding="{Binding CargoRequest.Sender.Name, Mode=TwoWay}"/>
+            <dxg:GridColumn Header="Получатель" Binding="{Binding CargoRequest.Recipient.Name, Mode=TwoWay}"/>
+            <dxg:GridColumn Header="Курьер" Binding="{Binding CargoRequest.Courier.Name, Mode=TwoWay}"/>
+            <dxg:GridControl.View>
+                <dxg:TableView  ShowGroupPanel="False" ShowSearchPanelMode="Always" Margin="0,0,-2,-2" AllowEditing="False" AutoWidth="True"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </dxb:BarManager>
+</UserControl>
