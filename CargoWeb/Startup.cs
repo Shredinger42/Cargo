@@ -53,7 +53,6 @@ namespace CargoWeb
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -62,8 +61,6 @@ namespace CargoWeb
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CargoWeb v1"));
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
