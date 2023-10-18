@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cargi;
 using Cargi.Services;
 using Cargo.Configuration;
 using Cargo.DTOs;
@@ -6,6 +7,7 @@ using Cargo.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -19,12 +21,14 @@ namespace Cargo.Services
         private string _cargoRequestUrl;
         private string _couriersUrl;
         private IMapper _mapper;
+
         public CargoWebService()
         {
             _client = new HttpClient();
-            _url = @"https://localhost:5001/";
-            _cargoRequestUrl = "CargoRequest";
-            _couriersUrl = "Courier";
+            _url = ConfigurationManager.AppSettings.Get(AppSettings.CargoWebServiceUrl);
+            _cargoRequestUrl = ConfigurationManager.AppSettings.Get(AppSettings.CargoRequestPath);
+            _couriersUrl = ConfigurationManager.AppSettings.Get(AppSettings.CourierPath);
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutoMapperConfiguration());
