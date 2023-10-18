@@ -7,7 +7,6 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["CargoWeb/CargoWeb.csproj", "CargoWeb/"]
 RUN dotnet restore "CargoWeb/CargoWeb.csproj"
 COPY . .
 WORKDIR "/src/CargoWeb"
