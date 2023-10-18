@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FileList>
+  <File Reference="DevExpress.Xpf.Grid.v20.1.dll">
+    <ToolboxItems VSCategory="DX.20.1: Data &amp; Analytics" BlendCategory="DX.20.1: Data &amp; Analytics">
+      <Item Type="DevExpress.Xpf.Grid.GridControl" />
+      <Item Type="DevExpress.Xpf.Grid.TreeListControl" />
+    </ToolboxItems>
+    <ToolboxItems VSCategory="DX.20.1: Common Controls" BlendCategory="DX.20.1: Common Controls">
+      <Item Type="DevExpress.Xpf.Grid.LookUp.LookUpEdit" />
+    </ToolboxItems>
+  </File>
+</FileList>
