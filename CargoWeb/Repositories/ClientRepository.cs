@@ -15,7 +15,7 @@ namespace CargoWeb.Repositories
             _db = db;
             _mapper = mapper;
         }
-
+        /// <inheritdoc />
         public async Task<ClientDb> AddAsync(Client client)
         {
             var clientDb = _mapper.Map<ClientDb>(client);

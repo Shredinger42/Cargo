@@ -16,7 +16,7 @@ namespace CargoWeb.Repositories
             _db = db;
             _mapper = mapper;
         }
-
+        /// <inheritdoc />
         public async Task<CargoDb> AddAsync(Cargo cargo)
         {
             var cargoDb = _mapper.Map<CargoDb>(cargo);
@@ -24,7 +24,7 @@ namespace CargoWeb.Repositories
             await _db.SaveChangesAsync();
             return result.Entity;
         }
-
+        /// <inheritdoc />
         public async Task<CargoDb> GetByIdAsync(long id)
         {
             return await _db.Cargos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);

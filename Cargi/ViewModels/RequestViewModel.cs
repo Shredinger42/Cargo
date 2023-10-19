@@ -88,6 +88,10 @@ namespace Cargo.ViewModels
             SubmittDialogService = GetService<IDialogService>("Submitt");
         }
 
+        /// <summary>
+        /// Команда для открытия диалогового окна редактирования заявки
+        /// </summary>
+        /// <returns></returns>
         [Command]
         public async Task ShowEdit()
         {
@@ -106,11 +110,17 @@ namespace Cargo.ViewModels
             }
         }
 
+        /// <summary>
+        /// Команда для открытия диалогового откна создания новой заявки
+        /// </summary>
+        /// <returns></returns>
         [Command]
         public async Task ShowSubmit()
         {
-            var dialogVm = new RequestViewModel(Couriers, CargoRequest, _webService);
-            dialogVm.CargoRequest = CargoRequest.Clone();
+            var dialogVm = new RequestViewModel(Couriers, CargoRequest, _webService)
+            {
+                CargoRequest = CargoRequest.Clone()
+            };
 
             var result = SubmittDialogService.ShowDialog(
                  dialogButtons: MessageButton.OKCancel,

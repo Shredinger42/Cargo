@@ -5,10 +5,16 @@ namespace Cargo.Models
 {
     public class Client : INotifyPropertyChanged
     {
+        /// <summary>
+        /// id клиента
+        /// </summary>
         public long Id { get; set; }
 
         private string _name;
 
+        /// <summary>
+        /// Наименование клиента
+        /// </summary>
         public string Name 
         {
             get => _name;

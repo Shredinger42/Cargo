@@ -21,7 +21,7 @@ namespace CargoWeb.Services
             _courierRepository = courierRepository;
             _logger = logger;
         }
-
+        /// <inheritdoc />
         public async Task<Courier> CreateCourierAsync(CourierDto courierDto)
         {
             try
@@ -41,7 +41,7 @@ namespace CargoWeb.Services
                 return null;
             }
         }
-
+        /// <inheritdoc />
         public async Task<IEnumerable<Courier>> GetAllCouriersAsync()
         {
             try

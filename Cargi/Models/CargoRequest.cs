@@ -6,10 +6,16 @@ namespace Cargo.Models
 {
     public class CargoRequest : INotifyPropertyChanged
     {
+        /// <summary>
+        /// id Заявки
+        /// </summary>
         public long Id { get; set; }
 
         private string _adress;
 
+        /// <summary>
+        /// Адрес
+        /// </summary>
         public string Adress 
         {
             get => _adress;
@@ -22,13 +28,26 @@ namespace Cargo.Models
                 }
             }
         }
+        /// <summary>
+        /// Отправитель
+        /// </summary>
         public Client Sender { get; set; }
+        /// <summary>
+        /// Получатель
+        /// </summary>
         public Client Recipient { get; set; }
+        /// <summary>
+        /// Курьер
+        /// </summary>
         public Courier Courier { get; set; }
+        /// <summary>
+        /// Груз
+        /// </summary>
         public Cargo Cargo { get; set; }
-
         private CargoState _state;
-
+        /// <summary>
+        /// Состояние заявки
+        /// </summary>
         public CargoState State 
         {
             get => _state;
@@ -45,6 +64,9 @@ namespace Cargo.Models
 
         private string _comment { get; set; }
 
+        /// <summary>
+        /// Комментарий
+        /// </summary>
         public string Comment
         {
             get => _comment;
@@ -58,6 +80,9 @@ namespace Cargo.Models
             }
         }
 
+        /// <summary>
+        /// Является ли заявка новой
+        /// </summary>
         public bool IsRequestNew => State == CargoState.New;
 
         public event PropertyChangedEventHandler PropertyChanged;

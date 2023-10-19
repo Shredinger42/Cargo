@@ -37,16 +37,19 @@ namespace Cargo.Services
             _mapper = mapperConfig.CreateMapper();
         }
 
+        /// <inheritdoc />
         public async Task<IEnumerable<Courier>> GetCouriers()
         {
             return await Get<Courier, CourierDto>(_couriersUrl);
         }
 
+        /// <inheritdoc />
         public async Task<IEnumerable<CargoRequest>> GetCargoRequests()
         {
             return await Get<CargoRequest, CargoRequestDto>(_cargoRequestUrl); ;
         }
 
+        /// <inheritdoc />
         public async Task CreateCargoRequest(Cargo.Models.Cargo cargo, Client sender, Client recipient, string adress)
         {
             var cargoDto = _mapper.Map<CargoDto>(cargo);
@@ -63,17 +66,20 @@ namespace Cargo.Services
             await Post(dto, string.Empty);
         }
 
+        /// <inheritdoc />
         public async Task DeleteCargoRequest(long id)
         {
             await _client.DeleteAsync($"{_url}{_cargoRequestUrl}/{id}");
         }
 
+        /// <inheritdoc />
         public async Task UpdateCargoRequest(CargoRequest cargoRequest)
         {
             var cargoRequestDto = _mapper.Map<CargoRequestDto>(cargoRequest);
             await Post(cargoRequestDto, "update");
         }
 
+        /// <inheritdoc />
         public async Task SubmittCargoRequest(long courierId, long cargoId, long cargoRequestId)
         {
             var submittCargoRequestDto = new SubmittCargoRequestDto

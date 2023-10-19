@@ -17,7 +17,7 @@ namespace CargoWeb.Repositories
             _db = db;
             _mapper = mapper;
         }
-
+        /// <inheritdoc />
         public async Task<IEnumerable<CargoRequestDb>> GetAllAsync()
         {
             var cargoRequestsDb = await _db.CargosRequests
@@ -29,12 +29,12 @@ namespace CargoWeb.Repositories
 
             return cargoRequestsDb;
         }
-
+        /// <inheritdoc />
         public async Task<CargoRequestDb> GetByIdAsync(long id)
         {
             return await _db.CargosRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
-
+        /// <inheritdoc />
         public async Task<CargoRequestDb> DeleteByIdAsync(long id)
         {
             var cargoRequestDb = new CargoRequestDb() { Id = id};
@@ -43,7 +43,7 @@ namespace CargoWeb.Repositories
             await _db.SaveChangesAsync();
             return deletedRequest.Entity;
         }
-
+        /// <inheritdoc />
         public async Task<CargoRequestDb> UpdateAsync(CargoRequest cargoRequest)
         {
             var cargoRequestDb = _mapper.Map<CargoRequestDb>(cargoRequest);
@@ -51,7 +51,7 @@ namespace CargoWeb.Repositories
             await _db.SaveChangesAsync();
             return updatedRequest.Entity;
         }
-
+        /// <inheritdoc />
         public async Task<CargoRequestDb> AddAsync(CargoRequest cargoRequest)
         {
             var cargoRequestDb = _mapper.Map<CargoRequestDb>(cargoRequest);

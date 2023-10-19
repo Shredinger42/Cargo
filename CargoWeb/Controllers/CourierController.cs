@@ -3,11 +3,16 @@ using CargoWeb.DTOs;
 using CargoWeb.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace CargoWeb.Controllers
 {
+    /// <summary>
+    /// Сервис для работы с курьерами
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class CourierController : ControllerBase
@@ -21,6 +26,13 @@ namespace CargoWeb.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Получение всех курьеров
+        /// </summary>
+        /// <returns></returns>
+        [SwaggerResponse((int)HttpStatusCode.OK, "Список курьеров", typeof(IEnumerable<CourierDto>))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server Error", typeof(int))]
+
         [HttpGet] 
         public async Task<ActionResult> Get()
         {
@@ -30,6 +42,13 @@ namespace CargoWeb.Controllers
             return Ok(resultDto);
         }
 
+        /// <summary>
+        /// Создание курьера
+        /// </summary>
+        /// <param name="courier">Данные курьера</param>
+        /// <returns></returns>
+        [SwaggerResponse((int)HttpStatusCode.OK, "Информация о том что курьер был создан", typeof(int))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server Error", typeof(int))]
         [HttpPost]
         public async Task<IActionResult> Post(CourierDto courier)
         {

@@ -5,6 +5,9 @@ using Microsoft.Extensions.Options;
 
 namespace CargoWeb.Repositories
 {
+    /// <summary>
+    /// Контект для работы с базой данных
+    /// </summary>
     public class ApplicationContext : DbContext
     {
         public DbSet<CargoDb> Cargos { get; set; }

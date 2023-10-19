@@ -14,7 +14,7 @@ namespace CargoWeb.Repositories
         {
             this._db = db;
         }
-
+        /// <inheritdoc />
         public async Task<CargoRequestDb> Update(long courierId, long cargoId, long cargoRequestId)
         {
             using (var transaction = _db.Database.BeginTransaction()) 

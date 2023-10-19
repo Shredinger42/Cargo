@@ -25,6 +25,8 @@ namespace Cargo.ViewModels
             set
             {
                 _selectedItem = value;
+                // Если вызывать команды из текущей VM, то необходимо пробрасывать сервисы внутрь дочерей vm 
+                // т.к. devexpress не может их сам найти
                 if (SelectedItem != null)
                 {
                     SelectedItem.EditDialogService = GetService<IDialogService>("Edit");
@@ -46,6 +48,8 @@ namespace Cargo.ViewModels
         public void Load()
         {
             CargoRequests.Clear();
+            // Вызываем Load из синхронного метода инициализации View, поэтому пришлось использовать такой способ вызова 
+            // асинхронного метода
             var couriersAwaiter = Task.Factory.StartNew(_webService.GetCouriers).GetAwaiter();
             var cargoRequestsAwaiter = Task.Factory.StartNew(_webService.GetCargoRequests).GetAwaiter();
             cargoRequestsAwaiter.OnCompleted(() =>
@@ -66,6 +70,10 @@ namespace Cargo.ViewModels
             });
         }
 
+        /// <summary>
+        /// Команда добавления новой заявки
+        /// </summary>
+        /// <returns></returns>
         [Command]
         public async Task AddNewRequest()
         {
@@ -87,6 +95,11 @@ namespace Cargo.ViewModels
             }
         }
 
+        /// <summary>
+        /// Команда удаления заявки
+        /// </summary>
+        /// <param name="request">ViewModel к которой привязана модель заявки</param>
+        /// <returns></returns>
         [Command]
         public async Task DeleteRequest(RequestViewModel request)
         {

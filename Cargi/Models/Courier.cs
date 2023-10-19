@@ -6,11 +6,17 @@ namespace Cargo.Models
 {
     public class Courier : INotifyPropertyChanged
     {
+        /// <summary>
+        /// id курьера
+        /// </summary>
         public long Id { get; set; }
 
 
         private string _name;
 
+        /// <summary>
+        /// Наименование курьера
+        /// </summary>
         public string Name
         {
             get => _name;
@@ -24,7 +30,10 @@ namespace Cargo.Models
             }
         }
 
-        public List<Cargo> CargoToDeliver { get; set; }
+        /// <summary>
+        /// Список грузов курьера для доставки
+        /// </summary>
+        public List<Cargo> CargoToDeliver { get; set; } = new List<Cargo>();
 
         public Courier Clone()
         {

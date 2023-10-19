@@ -5,9 +5,15 @@ namespace Cargo.Models
 {
     public class Cargo : INotifyPropertyChanged
     {
+        /// <summary>
+        /// id груза
+        /// </summary>
         public long Id { get; set; }
         private string _name;
 
+        /// <summary>
+        /// Наименование груза
+        /// </summary>
         public string Name
         {
             get => _name;
@@ -22,6 +28,9 @@ namespace Cargo.Models
         }
 
         private int _weight;
+        /// <summary>
+        /// Вес груза
+        /// </summary>
         public int Weight
         {
             get => _weight;
@@ -37,6 +46,9 @@ namespace Cargo.Models
 
         private decimal _price;
 
+        /// <summary>
+        /// Цена груза
+        /// </summary>
         public decimal Price
         {
             get => _price;

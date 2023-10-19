@@ -8,8 +8,18 @@ namespace CargoWeb.DbModels
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
+
+        /// <summary>
+        ///  Id курьера
+        /// </summary>
         public long Id { get; set; }
+        /// <summary>
+        /// Наименование курьера
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Список грузов курьера к доставке
+        /// </summary>
         public List<CargoDb> CargoToDeliver { get; set; } = new List<CargoDb>();
     }
 }

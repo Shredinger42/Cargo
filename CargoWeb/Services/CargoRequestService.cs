@@ -28,6 +28,7 @@ namespace CargoWeb.Services
             _mapper = mapper;
         }
 
+        /// <inheritdoc />
         public async Task<CargoRequest> CreateCargoRequestAsync(CargoRequestBody body)
         {
             try
@@ -57,7 +58,7 @@ namespace CargoWeb.Services
                 return null;
             }
         }
-
+        /// <inheritdoc />
         public async Task<IEnumerable<CargoRequest>> GetAllCargoRequestsAsync()
         {
             try
@@ -77,7 +78,7 @@ namespace CargoWeb.Services
                 return null;
             }
         }
-
+        /// <inheritdoc />
         public async Task<CargoRequest> UpdateCargoRequestAsync(CargoRequestDto cargoRequestDto)
         {
             try
@@ -97,7 +98,7 @@ namespace CargoWeb.Services
                 return null;
             }
         }
-
+        /// <inheritdoc />
         public async Task<CargoRequest> DeleteCargoRequestAsync(long id)
         {
             try
@@ -116,7 +117,7 @@ namespace CargoWeb.Services
                 return null;
             }
         }
-
+        /// <inheritdoc />
         public async Task<CargoRequest> SubmittCargoRequest(SubmittCargoRequestDto body)
         {
             try
