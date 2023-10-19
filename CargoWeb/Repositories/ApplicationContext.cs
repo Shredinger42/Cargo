@@ -1,5 +1,7 @@
 ﻿using CargoWeb.DbModels;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace CargoWeb.Repositories
 {
@@ -9,10 +11,14 @@ namespace CargoWeb.Repositories
         public DbSet<CargoRequestDb> CargosRequests { get; set; }
         public DbSet<ClientDb> Clients { get; set; }
         public DbSet<CourierDb> Couriers { get; set; }
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
-            : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            Database.EnsureCreated();   
+            var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = "Cargo.db" };
+            var connectionString = connectionStringBuilder.ToString();
+            var connection = new SqliteConnection(connectionString);
+
+            optionsBuilder.UseSqlite(connection);
+
         }
     }
 }

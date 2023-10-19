@@ -7,7 +7,7 @@ namespace CargoWeb.Services
 {
     public interface ICourierService
     {
-        Task<bool> CreateCourierAsync(CourierDto courierDto);
+        Task<Courier> CreateCourierAsync(CourierDto courierDto);
         Task<IEnumerable<Courier>> GetAllCouriersAsync();
 
     }

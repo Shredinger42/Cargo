@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using CargoWeb.DbModels;
+using System.Threading.Tasks;
 
 namespace CargoWeb.Repositories
 {
     public interface ICourierCargoCargoRequestRepository
     {
-        Task<bool> Update(long courierId, long cargoId, long cargoRequestId);
+        Task<CargoRequestDb> Update(long courierId, long cargoId, long cargoRequestId);
     }
 }

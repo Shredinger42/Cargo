@@ -35,26 +35,29 @@ namespace CargoWeb.Repositories
             return await _db.CargosRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task DeleteByIdAsync(long id)
+        public async Task<CargoRequestDb> DeleteByIdAsync(long id)
         {
             var cargoRequestDb = new CargoRequestDb() { Id = id};
             _db.CargosRequests.Attach(cargoRequestDb);
-            _db.CargosRequests.Remove(cargoRequestDb);
+            var deletedRequest = _db.CargosRequests.Remove(cargoRequestDb);
             await _db.SaveChangesAsync();
+            return deletedRequest.Entity;
         }
 
-        public async Task UpdateAsync(CargoRequest cargoRequest)
+        public async Task<CargoRequestDb> UpdateAsync(CargoRequest cargoRequest)
         {
             var cargoRequestDb = _mapper.Map<CargoRequestDb>(cargoRequest);
-            _db.CargosRequests.Update(cargoRequestDb);
+            var updatedRequest = _db.CargosRequests.Update(cargoRequestDb);
             await _db.SaveChangesAsync();
+            return updatedRequest.Entity;
         }
 
-        public async Task AddAsync(CargoRequest cargoRequest)
+        public async Task<CargoRequestDb> AddAsync(CargoRequest cargoRequest)
         {
             var cargoRequestDb = _mapper.Map<CargoRequestDb>(cargoRequest);
-            await _db.CargosRequests.AddAsync(cargoRequestDb);
+            var addedRequest = await _db.CargosRequests.AddAsync(cargoRequestDb);
             await _db.SaveChangesAsync();
+            return addedRequest.Entity;
         }
     }
 }

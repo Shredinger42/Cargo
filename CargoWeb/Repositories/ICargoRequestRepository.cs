@@ -11,10 +11,10 @@ namespace CargoWeb.Repositories
         
         Task<CargoRequestDb> GetByIdAsync(long id);
 
-        Task DeleteByIdAsync(long id);
+        Task<CargoRequestDb> DeleteByIdAsync(long id);
 
-        Task UpdateAsync(CargoRequest cargoRequest);
+        Task<CargoRequestDb> UpdateAsync(CargoRequest cargoRequest);
 
-        Task AddAsync(CargoRequest cargoRequest);
+        Task<CargoRequestDb> AddAsync(CargoRequest cargoRequest);
     }
 }

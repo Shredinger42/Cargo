@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CargoWeb.DTOs;
-using CargoWeb.Models;
 using CargoWeb.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -22,18 +22,19 @@ namespace CargoWeb.Controllers
         }
 
         [HttpGet] 
-        public async Task<IEnumerable<CourierDto>> Get()
+        public async Task<ActionResult> Get()
         {
             var result = await _courierService.GetAllCouriersAsync();
+            if (result is null) return StatusCode(StatusCodes.Status500InternalServerError);
             var resultDto = _mapper.Map<IEnumerable<CourierDto>>(result);
-            return resultDto;
+            return Ok(resultDto);
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(CourierDto courier)
         {
             var result = await _courierService.CreateCourierAsync(courier);
-            return result ? Ok() : BadRequest();
+            return result is not null ? Ok() : StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 }

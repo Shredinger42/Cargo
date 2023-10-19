@@ -40,8 +40,12 @@ namespace CargoWeb
             });
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(connection));
+            using (var db = new ApplicationContext())
+            {
+                db.Database.EnsureCreated();
+                db.Database.Migrate();
+            }
+            services.AddEntityFrameworkSqlite().AddDbContext<ApplicationContext>();
 
             services.AddScoped<ICargoRequestRepository, CargoRequestRepository>();
             services.AddScoped<ICargoRepository, CargoRepository>();

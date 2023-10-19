@@ -7,10 +7,10 @@ namespace CargoWeb.Services
 {
     public interface ICargoRequestService
     {
-        Task<bool> CreateCargoRequestAsync(CargoRequestBody body);
+        Task<CargoRequest> CreateCargoRequestAsync(CargoRequestBody body);
         Task<IEnumerable<CargoRequest>> GetAllCargoRequestsAsync();
-        Task<bool> UpdateCargoRequestAsync(CargoRequestDto cargoRequestDto);
-        Task<bool> DeleteCargoRequestAsync(long id);
-        Task<bool> SubmittCargoRequest(SubmittCargoRequestDto body);
+        Task<CargoRequest> UpdateCargoRequestAsync(CargoRequestDto cargoRequestDto);
+        Task<CargoRequest> DeleteCargoRequestAsync(long id);
+        Task<CargoRequest> SubmittCargoRequest(SubmittCargoRequestDto body);
     }
 }
